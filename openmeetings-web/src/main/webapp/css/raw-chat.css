@@ -13,9 +13,6 @@
 #chat {
 	height: calc(100% - 20px);
 }
-#chat .chat-toolbar.btn-toolbar .dropdown-menu {
-	min-width: unset;
-}
 #chat .chat-toolbar.btn-toolbar .dropdown-menu.btns-only li {
 	display: inline-block;
 }
@@ -119,7 +116,6 @@ html[dir="rtl"] #chat .messageArea .icons {
 }
 #chat .chat-tool-icon, #chat .chat.btn {
 	font-size: 1.1em;
-	max-height: var(--chat-tools-height);
 }
 #chat .sound.chat-tool-icon i::before {
 	content: '\f028';
@@ -143,7 +139,8 @@ html[dir="rtl"] #chat .messageArea .icons {
 	margin-left: 0;
 }
 #chat .tool-container {
-	min-height: var(--chat-tools-height);
+	max-height: var(--chat-tools-height);
+	height: var(--chat-tools-height);
 }
 /* room mode */
 .main.room #chatPanel {

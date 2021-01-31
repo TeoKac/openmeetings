@@ -11,9 +11,8 @@ body {
 	--chat-width: 600px;
 	--chat-height: 20px;
 	--chat-tabs-height: 26px;
-	--chat-tools-height: 40px;
+	--chat-tools-height: 37px;
 	--chat-msg-height: 80px;
-	--chat-send-width: 32px;
 }
 body.no-header {
 	--header-height: 0px;
@@ -40,7 +39,7 @@ body.no-menu {
 }
 .file-tree {
 	--tree-header-height: 36px;
-	--tree-footer-height: 60px;
+	--tree-footer-height: 50px;
 }
 .main.room {
 	--header-height: 0px;

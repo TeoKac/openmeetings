@@ -35,7 +35,7 @@ public abstract class FormActionsPanel<T> extends Panel {
 	private AjaxButton saveBtn;
 	private AjaxLink<Void> purgeBtn;
 
-	protected FormActionsPanel(String id, Form<T> form) {
+	public FormActionsPanel(String id, Form<T> form) {
 		super(id);
 		this.form = form;
 		setOutputMarkupId(true);
@@ -72,7 +72,7 @@ public abstract class FormActionsPanel<T> extends Panel {
 			public void onClick(AjaxRequestTarget target) {
 				// repaint the feedback panel so that it is hidden
 				target.add(feedback);
-				setNewRecordVisible(false);
+				setNewVisible(false);
 				onRefreshSubmit(target, form);
 			}
 		});
@@ -83,7 +83,7 @@ public abstract class FormActionsPanel<T> extends Panel {
 			public void onClick(AjaxRequestTarget target) {
 				// repaint the feedback panel so that it is hidden
 				target.add(feedback);
-				setNewRecordVisible(false);
+				setNewVisible(false);
 				onPurgeSubmit(target, form);
 			}
 		};
@@ -101,7 +101,7 @@ public abstract class FormActionsPanel<T> extends Panel {
 	 *
 	 * @param visible - new visibility
 	 */
-	public void setNewRecordVisible(boolean visible) {
+	public void setNewVisible(boolean visible) {
 		// for admin only, will be implemented in admin
 	}
 

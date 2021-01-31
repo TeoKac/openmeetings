@@ -34,11 +34,11 @@ public abstract class PagingNavigatorPanel extends Panel {
 	private final DataView<?> dataView;
 	private final List<Integer> numbers;
 
-	protected PagingNavigatorPanel(String id, final DataView<?> dataView) {
+	public PagingNavigatorPanel(String id, final DataView<?> dataView) {
 		this(id, dataView, List.of(10, 25, 50, 75, 100, 200), 50);
 	}
 
-	protected PagingNavigatorPanel(String id, final DataView<?> dataView, List<Integer> numbers, int entitiesPerPage) {
+	public PagingNavigatorPanel(String id, final DataView<?> dataView, List<Integer> numbers, int entitiesPerPage) {
 		super(id);
 		setOutputMarkupId(true);
 		this.entitiesPerPage = entitiesPerPage;

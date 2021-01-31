@@ -25,7 +25,7 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 public abstract class AdminBasePanel extends BasePanel {
 	private static final long serialVersionUID = 1L;
 
-	protected AdminBasePanel(String id) {
+	public AdminBasePanel(String id) {
 		super(id);
 	}
 

@@ -18,9 +18,9 @@
  */
 package org.apache.openmeetings.web.admin.oauth;
 
-import static org.apache.openmeetings.web.app.UserManager.getRedirectUri;
 import static org.apache.openmeetings.web.app.WebSession.getUserId;
 import static org.apache.openmeetings.web.common.confirmation.ConfirmationBehavior.newOkCancelDangerConfirm;
+import static org.apache.openmeetings.web.pages.auth.SignInPage.getRedirectUri;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
@@ -98,7 +98,6 @@ public class OAuthForm extends AdminBaseForm<OAuthServer> {
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 		add(new CheckBox("isEnabled"));
 		add(new RequiredTextField<String>("name").setLabel(new ResourceModel("165")));
 		add(new TextField<String>("iconUrl").setLabel(new ResourceModel("1575")));
@@ -130,7 +129,7 @@ public class OAuthForm extends AdminBaseForm<OAuthServer> {
 					}
 				}).setOutputMarkupId(true));
 		add(attrsContainer.add(updateMapping()).setOutputMarkupId(true));
-		setNewRecordVisible(true);
+		super.onInitialize();
 	}
 
 	private Component updateMapping() {
@@ -153,7 +152,7 @@ public class OAuthForm extends AdminBaseForm<OAuthServer> {
 		oauthDao.update(getModelObject(), getUserId());
 		OAuthServer oauthServer = oauthDao.get(getModelObject().getId());
 		this.setModelObject(oauthServer);
-		setNewRecordVisible(false);
+		setNewVisible(false);
 		target.add(this);
 		target.add(listContainer);
 	}

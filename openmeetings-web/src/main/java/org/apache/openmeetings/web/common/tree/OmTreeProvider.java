@@ -19,7 +19,6 @@
 package org.apache.openmeetings.web.common.tree;
 
 import static org.apache.openmeetings.db.util.AuthLevelUtil.hasAdminLevel;
-import static org.apache.openmeetings.util.OpenmeetingsVariables.isRecordingsEnabled;
 import static org.apache.openmeetings.web.app.WebSession.getRights;
 import static org.apache.openmeetings.web.app.WebSession.getUserId;
 
@@ -54,9 +53,7 @@ public class OmTreeProvider implements ITreeProvider<BaseFileItem> {
 	public static final String FILES_GROUP = "files-group-%s";
 	private final Long roomId;
 	private final List<BaseFileItem> roots = new ArrayList<>();
-	private final String lblPublic;
-	private final String lblGroupFile;
-	private final String lblGroupRec;
+	private final String lblPublic, lblGroupFile, lblGroupRec;
 	@SpringBean
 	private UserDao userDao;
 	@SpringBean
@@ -85,7 +82,7 @@ public class OmTreeProvider implements ITreeProvider<BaseFileItem> {
 			r.setRoomId(roomId);
 			fRoot.add(r);
 		}
-		if (all && isRecordingsEnabled()) {
+		if (all) {
 			{
 				BaseFileItem r = createRoot(Application.getString("860"), RECORDINGS_MY, true);
 				r.setOwnerId(getUserId());
@@ -99,7 +96,7 @@ public class OmTreeProvider implements ITreeProvider<BaseFileItem> {
 		for (GroupUser gu : userDao.get(getUserId()).getGroupUsers()) {
 			Group g = gu.getGroup();
 			boolean readOnly = g.isRestricted() && !hasAdminLevel(getRights()) && !gu.isModerator();
-			if (all && isRecordingsEnabled()) {
+			if (all) {
 				BaseFileItem r = createRoot(String.format("%s (%s)", lblGroupRec, g.getName()), String.format(RECORDINGS_GROUP, g.getId()), true);
 				r.setReadOnly(readOnly);
 				r.setGroupId(g.getId());

@@ -45,9 +45,9 @@ html, body {
 	font-size: 28px;
 	line-height: 40px;
 	font-weight: bold;
-	background-image: url(images/logo.png);
+	/* background-image: url(images/logo.png); */
 	background-repeat: no-repeat;
-	padding-left: 80px;
+	/* padding-left: 80px; */
 	margin-left: 20px;
 	height: var(--header-height);
 }
@@ -337,6 +337,12 @@ select.messages.selector {
 	height: 16px;
 	display: inline-block;
 	margin-left: 10px;
+}
+.invisible-form-component {
+	position: absolute;
+	top: -9999px;
+	width: 1px;
+	height: 1px;
 }
 #messagesTable tr.selected {
 	background-color: #d7ebf9;
@@ -734,6 +740,10 @@ select.messages.selector {
 }
 .abstractWizard input[type=checkbox], .abstractWizard input[type=radio] {
 	width: auto;
+}
+.invitation .message {
+	width: 280px;
+	height: 70px;
 }
 .img-upload .btn.btn-file {
 	width: 120px;

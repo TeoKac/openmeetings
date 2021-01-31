@@ -18,7 +18,6 @@
  */
 package org.apache.openmeetings.web.common.tree;
 
-import static de.agilecoders.wicket.core.markup.html.bootstrap.dialog.Modal.BUTTON_MARKUP_ID;
 import static java.time.Duration.ZERO;
 import static java.util.UUID.randomUUID;
 import static org.apache.openmeetings.util.OmFileHelper.EXTENSION_JPG;
@@ -33,6 +32,7 @@ import static org.apache.openmeetings.web.pages.BasePage.ALIGN_RIGHT;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +44,6 @@ import org.apache.openmeetings.db.entity.file.BaseFileItem;
 import org.apache.openmeetings.db.entity.file.BaseFileItem.Type;
 import org.apache.openmeetings.db.entity.file.FileItem;
 import org.apache.openmeetings.db.entity.record.Recording;
-import org.apache.openmeetings.util.OmFileHelper;
 import org.apache.openmeetings.web.common.NameDialog;
 import org.apache.openmeetings.web.common.confirmation.ConfirmableAjaxBorder;
 import org.apache.openmeetings.web.common.confirmation.ConfirmationDialog;
@@ -99,7 +98,6 @@ public abstract class FileTreePanel extends Panel {
 	private BaseFileItem lastSelected = null;
 	private Map<String, BaseFileItem> selected = new HashMap<>();
 	private File dwnldFile;
-	private String dwnldName;
 	final AjaxDownloadBehavior downloader = new AjaxDownloadBehavior(new IResource() {
 		private static final long serialVersionUID = 1L;
 
@@ -112,7 +110,6 @@ public abstract class FileTreePanel extends Panel {
 				protected ResourceResponse createResourceResponse(Attributes attr, Path path) {
 					ResourceResponse response = super.createResourceResponse(attr, path);
 					response.setCacheDuration(ZERO);
-					response.setFileName(dwnldName);
 					return response;
 				}
 			}.respond(attributes);
@@ -144,7 +141,7 @@ public abstract class FileTreePanel extends Panel {
 	@SpringBean
 	private FileItemDao fileDao;
 
-	protected FileTreePanel(String id, Long roomId, NameDialog addFolder) {
+	public FileTreePanel(String id, Long roomId, NameDialog addFolder) {
 		super(id);
 		this.roomId = roomId;
 		this.addFolder = addFolder;
@@ -293,13 +290,12 @@ public abstract class FileTreePanel extends Panel {
 						? fi.getOriginal() : fi.getFile(ext);
 				if (f != null && f.exists()) {
 					dwnldFile = f;
-					dwnldName = fi.getName() + "." + OmFileHelper.getFileExt(f.getName());
 					downloader.initiate(target);
 				}
 			}
 		};
 		buttons.setOutputMarkupId(true);
-		form.add(buttons.add(download, new ListView<>("other-buttons", newOtherButtons(BUTTON_MARKUP_ID)) {
+		form.add(buttons.add(download, new ListView<>("other-buttons", newOtherButtons("button")) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -337,10 +333,6 @@ public abstract class FileTreePanel extends Panel {
 		response.render(JavaScriptHeaderItem.forReference(new JavaScriptResourceReference(FileTreePanel.class, "filetree.js")));
 	}
 
-	/**
-	 * can be overridden by children to provide custom containment
-	 * @return custom containment
-	 */
 	protected String getContainment() {
 		return ".file.item.drop.area";
 	}
@@ -401,6 +393,7 @@ public abstract class FileTreePanel extends Panel {
 		f.setName(name);
 		f.setHash(randomUUID().toString());
 		f.setInsertedBy(getUserId());
+		f.setInserted(new Date());
 		f.setType(Type.FOLDER);
 		f.setOwnerId(p.getOwnerId());
 		f.setGroupId(p.getGroupId());

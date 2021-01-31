@@ -23,10 +23,8 @@ import static org.apache.openmeetings.util.CalendarHelper.getDate;
 import static org.apache.openmeetings.web.app.Application.getInvitationLink;
 import static org.apache.openmeetings.web.app.WebSession.AVAILABLE_TIMEZONES;
 import static org.apache.openmeetings.web.app.WebSession.getUserId;
-import static org.apache.openmeetings.web.util.CalendarWebHelper.getZoneId;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -91,7 +89,7 @@ public abstract class InvitationForm extends Form<Invitation> {
 		, SEND
 	}
 
-	protected InvitationForm(String id) {
+	public InvitationForm(String id) {
 		super(id, new CompoundPropertyModel<>(new Invitation()));
 		setOutputMarkupId(true);
 	}
@@ -169,6 +167,7 @@ public abstract class InvitationForm extends Form<Invitation> {
 		Invitation i = new Invitation(getModelObject());
 		i.setInvitedBy(userDao.get(getUserId()));
 		i.setId(null);
+		i.setUpdated(null);
 		i.setUsed(false);
 
 		i.setPassword(CryptProvider.get().hash(i.getPassword()));
@@ -197,9 +196,8 @@ public abstract class InvitationForm extends Form<Invitation> {
 		User u = userDao.get(getUserId());
 		i.setInvitedBy(u);
 		i.setRoom(null);
-		LocalDateTime now = ZonedDateTime.now(getZoneId()).toLocalDateTime();
-		from.setModelObject(now);
-		to.setModelObject(now.plusDays(1));
+		from.setModelObject(LocalDateTime.now());
+		to.setModelObject(LocalDateTime.now().plusDays(1));
 		i.setPassword(null);
 		i.setHash(null);
 		subject.setModelObject(null);

@@ -84,9 +84,7 @@ public class AbstractWicketTester extends AbstractJUnitDefaults {
 		tester = getWicketTester(app);
 		assertNotNull(WebSession.get(), "Web session should not be null");
 		Locale[] locales = Locale.getAvailableLocales();
-		Locale l = locales[rnd.nextInt(locales.length)];
-		log.info("{} Locale is selected", l);
-		tester.getSession().setLocale(l);
+		tester.getSession().setLocale(locales[rnd.nextInt(locales.length)]);
 	}
 
 	public void login(String login, String password) {

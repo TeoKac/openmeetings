@@ -26,9 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.string.Strings;
@@ -43,34 +41,20 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.NavbarDropDownBut
 public class OmMenuItem implements INavbarComponent {
 	private static final long serialVersionUID = 1L;
 
-	private final String title;
-	private final String desc;
-	private final IconType icon;
-	private final List<INavbarComponent> items = new ArrayList<>(0);
+	private String title;
+	private String desc;
+	private IconType icon;
+	private List<INavbarComponent> items = new ArrayList<>(0);
 	private boolean visible = true;
 
-	public OmMenuItem(String title, String desc) {
-		this(title, desc, null, List.of());
-	}
-
-	public OmMenuItem(String title, String desc, boolean visible) {
-		this(title, desc);
-		this.visible = visible;
-	}
-
 	public OmMenuItem(String title, List<INavbarComponent> items) {
-		this(title, null, null, items);
+		this.title = title;
+		this.items = items;
 	}
 
-	public OmMenuItem(String title, String desc, IconType icon) {
-		this(title, desc, icon, List.of());
-	}
-
-	public OmMenuItem(String title, String desc, IconType icon, List<INavbarComponent> items) {
+	public OmMenuItem(String title, String desc) {
 		this.title = title;
 		this.desc = desc;
-		this.icon = icon;
-		this.items.addAll(items);
 	}
 
 	public OmMenuItem add(INavbarComponent item) {
@@ -80,6 +64,14 @@ public class OmMenuItem implements INavbarComponent {
 
 	public String getDesc() {
 		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public void setIcon(IconType icon) {
+		this.icon = icon;
 	}
 
 	public void setVisible(boolean visible) {
@@ -100,8 +92,9 @@ public class OmMenuItem implements INavbarComponent {
 					return items.stream().map(mItem -> ((OmMenuItem)mItem).createLink(markupId, false)).collect(Collectors.toList());
 				}
 			};
-			setAttributes(item);
 		}
+		item.add(AttributeModifier.append(ATTR_TITLE, desc));
+		item.setVisible(visible);
 		return item;
 	}
 
@@ -116,34 +109,18 @@ public class OmMenuItem implements INavbarComponent {
 			public void onClick(AjaxRequestTarget target) {
 				OmMenuItem.this.onClick(target);
 			}
-
-			@Override
-			protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
-				OmMenuItem.this.updateAjaxAttributes(attributes);
-			}
 		};
 		if (topLevel) {
 			link.add(AttributeModifier.append(ATTR_CLASS, "nav-link"));
 		}
-		setAttributes(link);
 		return link.setIconType(icon);
-	}
-
-	private void setAttributes(Component comp) {
-		comp.add(AttributeModifier.append(ATTR_TITLE, desc));
-		comp.setVisible(visible);
 	}
 
 	@Override
 	public ComponentPosition getPosition() {
-		return ComponentPosition.LEFT;
+		return ComponentPosition.LEFT; //FIXME TODO
 	}
 
-	protected void onClick(AjaxRequestTarget target) {
-		// no-op by default
-	}
-
-	protected void updateAjaxAttributes(AjaxRequestAttributes attributes) {
-		// no-op by default
+	public void onClick(AjaxRequestTarget target) {
 	}
 }

@@ -21,12 +21,9 @@ package org.apache.openmeetings.web.user.rooms;
 import static org.apache.openmeetings.web.app.WebSession.getUserId;
 
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.openmeetings.db.dao.room.RoomDao;
 import org.apache.openmeetings.db.dao.user.UserDao;
-import org.apache.openmeetings.db.entity.user.Group;
-import org.apache.openmeetings.db.entity.user.GroupUser;
 import org.apache.openmeetings.db.entity.user.User;
 import org.apache.openmeetings.web.common.UserPanel;
 import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
@@ -52,15 +49,12 @@ public class RoomsTabbedPanel extends UserPanel {
 	protected void onInitialize() {
 		super.onInitialize();
 		User u = userDao.get(getUserId());
-		Stream<Group> groups = u.getGroupUsers().stream()
-				.map(GroupUser::getGroup)
-				.filter(g -> !roomDao.getGroupRooms(g.getId()).isEmpty());
-		add(new AjaxBootstrapTabbedPanel<>("orgTabs", groups.map(g -> new AbstractTab(Model.of(g.getName())) {
+		add(new AjaxBootstrapTabbedPanel<>("orgTabs", u.getGroupUsers().stream().map(gu -> new AbstractTab(Model.of(gu.getGroup().getName())) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public WebMarkupContainer getPanel(String panelId) {
-				return new RoomsPanel(panelId, roomDao.getGroupRooms(g.getId()));
+				return new RoomsPanel(panelId, roomDao.getGroupRooms(gu.getGroup().getId()));
 			}
 		}).collect(Collectors.toList())));
 	}

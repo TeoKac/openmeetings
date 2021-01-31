@@ -93,6 +93,7 @@ public class LangPanel extends AdminBasePanel {
 		language = new AbstractMap.SimpleEntry<>(1L, Locale.ENGLISH);
 
 		final LabelsForm form = new LabelsForm("form", this, new StringLabel(null, null));
+		form.setNewVisible(true);
 		add(form);
 
 		final SearchableDataView<StringLabel> dataView = new SearchableDataView<>(
@@ -123,7 +124,7 @@ public class LangPanel extends AdminBasePanel {
 					@Override
 					protected void onEvent(AjaxRequestTarget target) {
 						form.setModelObject(fv);
-						form.setNewRecordVisible(false);
+						form.setNewVisible(false);
 						target.add(form, listContainer);
 					}
 				});

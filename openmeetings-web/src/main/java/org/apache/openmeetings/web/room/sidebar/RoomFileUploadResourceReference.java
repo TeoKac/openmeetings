@@ -72,7 +72,7 @@ public class RoomFileUploadResourceReference extends ResourceReference {
 	private static final String PARAM_CLEAN_NAME = "room-upload-clean";
 	private static final String PARAM_SID_NAME = "room-upload-sid";
 	private static final String PARAM_LAST_SELECTED_NAME = "room-upload-last-selected";
-	private enum Status {
+	private static enum Status {
 		SUCCESS
 		, PROGRESS
 		, ERROR

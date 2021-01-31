@@ -174,7 +174,6 @@ public class UserForm extends AdminBaseForm<User> {
 		}));
 		mainContainer.add(new ComunityUserForm("comunity", getModel()));
 		remove(validationBehavior);
-		setNewRecordVisible(true);
 	}
 
 	@Override
@@ -278,7 +277,7 @@ public class UserForm extends AdminBaseForm<User> {
 
 	private void updateForm(AjaxRequestTarget target) {
 		setModelObject(userDao.get(getModelObject().getId()));
-		setNewRecordVisible(false);
+		setNewVisible(false);
 		target.add(this, listContainer);
 	}
 

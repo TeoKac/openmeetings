@@ -53,6 +53,7 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="54"><![CDATA[ОК]]></entry>
 	<entry key="59"><![CDATA[Език:]]></entry>
 	<entry key="62"><![CDATA[Изчистване на дъската]]></entry>
+	<entry key="64"><![CDATA[Не питай отново]]></entry>
 	<entry key="70"><![CDATA[Стъпка назад]]></entry>
 	<entry key="72"><![CDATA[Маркиране на обект]]></entry>
 	<entry key="73"><![CDATA[Текст]]></entry>
@@ -189,9 +190,11 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="442"><![CDATA[Изтриване на чат история]]></entry>
 	<entry key="482"><![CDATA[Участници]]></entry>
 	<entry key="498"><![CDATA[Няма модератор в стаята, но има други участници. Може да поискате права на модаратор или да изчакате.]]></entry>
+	<entry key="499"><![CDATA[Обратна връзка с {0}]]></entry>
 	<entry key="500"><![CDATA[{0} - Покана]]></entry>
 	<entry key="501"><![CDATA[Съобщение от потребител:]]></entry>
 	<entry key="502"><![CDATA[Съобщение:]]></entry>
+	<entry key="503"><![CDATA[Натиснете линка, за да участвате в срещата:]]></entry>
 	<entry key="504"><![CDATA[Натиснете тук, за вход в стаята]]></entry>
 	<entry key="505"><![CDATA[Ако имате проблеми с линка, копирайте го и го вмъкнете в браузъра:]]></entry>
 	<entry key="506"><![CDATA[Регистрация в {0}]]></entry>
@@ -221,6 +224,8 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="557"><![CDATA[Указател]]></entry>
 	<entry key="565"><![CDATA[Напомняне:]]></entry>
 	<entry key="569"><![CDATA[Място:]]></entry>
+	<entry key="570"><![CDATA[Начало]]></entry>
+	<entry key="571"><![CDATA[Край]]></entry>
 	<entry key="572"><![CDATA[Заглавие:]]></entry>
 	<entry key="582"><![CDATA[Табло]]></entry>
 	<entry key="583"><![CDATA[Гледане на записани срещи]]></entry>
@@ -285,6 +290,7 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="784"><![CDATA[Искане за Модератор]]></entry>
 	<entry key="785"><![CDATA[Искане за рисуване върху дъската]]></entry>
 	<entry key="786"><![CDATA[Искане достъп до камера/микрофон]]></entry>
+	<entry key="788"><![CDATA[СТАРТ]]></entry>
 	<entry key="792"><![CDATA[Стаи]]></entry>
 	<entry key="797"><![CDATA[Предупреждение]]></entry>
 	<entry key="799"><![CDATA[ден]]></entry>
@@ -356,6 +362,8 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="1147"><![CDATA[Created by]]></entry>
 	<entry key="1151"><![CDATA[New {0} conference:]]></entry>
 	<entry key="1152"><![CDATA[Details:]]></entry>
+	<entry key="1153"><![CDATA[Start:]]></entry>
+	<entry key="1154"><![CDATA[End:]]></entry>
 	<entry key="1155"><![CDATA[Changed {0} conference:]]></entry>
 	<entry key="1156"><![CDATA[Organizer:]]></entry>
 	<entry key="1157"><![CDATA[Canceled {0} conference:]]></entry>
@@ -369,6 +377,7 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="1168"><![CDATA[Show contact data to contacts only]]></entry>
 	<entry key="1169"><![CDATA[Show contact data to nobody]]></entry>
 	<entry key="1170"><![CDATA[My Profile]]></entry>
+	<entry key="1171"><![CDATA[Edit settings]]></entry>
 	<entry key="1172"><![CDATA[Search users]]></entry>
 	<entry key="1177"><![CDATA[User offers]]></entry>
 	<entry key="1178"><![CDATA[User looks for]]></entry>
@@ -415,7 +424,7 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="1259"><![CDATA[Add folders and organize your messages!]]></entry>
 	<entry key="1261"><![CDATA[Add]]></entry>
 	<entry key="1262"><![CDATA[Delete folder]]></entry>
-	<entry key="1268"><![CDATA[The user does not share personal contact data.]]></entry>
+	<entry key="1268"><![CDATA[The user does not share his personal contact data.]]></entry>
 	<entry key="1269"><![CDATA[The user shares their personal contact data only to contacts.]]></entry>
 	<entry key="1287"><![CDATA[Choose your nickname]]></entry>
 	<entry key="1296"><![CDATA[Member since]]></entry>
@@ -559,11 +568,9 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="admin.group.form.maxFilesSize"><![CDATA[Maximum files size]]></entry>
 	<entry key="admin.group.form.maxRecordingsSize"><![CDATA[Maximum recordings size]]></entry>
 	<entry key="admin.group.form.maxRooms"><![CDATA[Maximum room number]]></entry>
-	<entry key="admin.group.form.minutes"><![CDATA[minutes]]></entry>
 	<entry key="admin.group.form.recordingTtl"><![CDATA[Recordings expire in]]></entry>
 	<entry key="admin.group.form.reminderDays"><![CDATA[Expire reminder sent in]]></entry>
 	<entry key="admin.group.form.tag"><![CDATA[Tag]]></entry>
-	<entry key="admin.group.new.users.notification.interval"><![CDATA[New user notification interval]]></entry>
 	<entry key="admin.oauth.attr.oauth"><![CDATA[OAuth User attribute]]></entry>
 	<entry key="admin.oauth.attr.om"><![CDATA[OM User attribute]]></entry>
 	<entry key="admin.oauth.req.info.method"><![CDATA[Request info method]]></entry>
@@ -620,10 +627,8 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="dashboard.widget.admin.cleanup.warn"><![CDATA[Are you sure you want to delete all temporary files? This operation cannot be undone.]]></entry>
 	<entry key="dashboard.widget.admin.desc"><![CDATA[General Admin functions]]></entry>
 	<entry key="dashboard.widget.admin.title"><![CDATA[Admin functions]]></entry>
-	<entry key="dont.ask.again"><![CDATA[Не питай отново]]></entry>
 	<entry key="download.pdf"><![CDATA[Сваляне в PDF]]></entry>
 	<entry key="download.png"><![CDATA[Сваляне в PNG]]></entry>
-	<entry key="edit.settings"><![CDATA[Edit settings]]></entry>
 	<entry key="error.bad.credentials"><![CDATA[Username/email and/or password are incorrect.]]></entry>
 	<entry key="error.bad.password"><![CDATA[Грешна парола]]></entry>
 	<entry key="error.cfg.exist"><![CDATA[Configuration with given key already exists, please specify another key or edit existent configuration]]></entry>
@@ -643,14 +648,11 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 	<entry key="error.type.error"><![CDATA[Грешка]]></entry>
 	<entry key="error.type.info"><![CDATA[Съобщение]]></entry>
 	<entry key="error.unknown"><![CDATA[Грешка. Докладвайте за бъг!]]></entry>
-	<entry key="file.name.interview"><![CDATA[Interview]]></entry>
-	<entry key="file.name.recording"><![CDATA[Recording]]></entry>
 	<entry key="files.download.jpg"><![CDATA[JPG]]></entry>
 	<entry key="files.download.original"><![CDATA[Original]]></entry>
 	<entry key="files.download.pdf"><![CDATA[PDF]]></entry>
 	<entry key="files.root.group"><![CDATA[Group files]]></entry>
 	<entry key="find.user"><![CDATA[Find user]]></entry>
-	<entry key="fixed.video.pod.size"><![CDATA[Fixed video pod size]]></entry>
 	<entry key="goto.first"><![CDATA[първа страница]]></entry>
 	<entry key="goto.last"><![CDATA[последна страница]]></entry>
 	<entry key="goto.next"><![CDATA[следваща страница]]></entry>
@@ -819,13 +821,8 @@ see https://openmeetings.apache.org/LanguageEditor.html for Details
 
 	<br />
 	]]></entry>
-	<entry key="internal.error"><![CDATA[Unfortunately something bad just happen :(, <br/>
-please check <tt>openmeetings.log</tt> and contact OpenMeetings developers]]></entry>
 	<entry key="invalid.hash"><![CDATA[Invalid hash]]></entry>
 	<entry key="label.dock.panel"><![CDATA[Click to dock panel]]></entry>
-	<entry key="label.end"><![CDATA[Край]]></entry>
-	<entry key="label.hangup"><![CDATA[Hang-up]]></entry>
-	<entry key="label.start"><![CDATA[Начало]]></entry>
 	<entry key="label.undock.panel"><![CDATA[Click to undock panel]]></entry>
 	<entry key="lbl.cancel"><![CDATA[Отказ]]></entry>
 	<entry key="lbl.email"><![CDATA[E-mail:]]></entry>
@@ -836,7 +833,6 @@ please check <tt>openmeetings.log</tt> and contact OpenMeetings developers]]></e
 	<entry key="lbl.refresh"><![CDATA[опресняване]]></entry>
 	<entry key="lbl.settings.whiteboard"><![CDATA[Whiteboard Settings]]></entry>
 	<entry key="lbl.update"><![CDATA[Update]]></entry>
-	<entry key="lbl.video"><![CDATA[Video]]></entry>
 	<entry key="main.menu.admin.email"><![CDATA[Email management]]></entry>
 	<entry key="main.menu.admin.email.desc"><![CDATA[Check e-mails processing by the system]]></entry>
 	<entry key="menu.polls"><![CDATA[Polls]]></entry>
@@ -875,8 +871,6 @@ please check <tt>openmeetings.log</tt> and contact OpenMeetings developers]]></e
 	<entry key="network.test.upl.bytes"><![CDATA[Bytes uploaded]]></entry>
 	<entry key="network.test.upl.speed"><![CDATA[Upload speed]]></entry>
 	<entry key="network.test.upl.time"><![CDATA[Upload time]]></entry>
-	<entry key="notification.chat.message"><![CDATA[You have new chat message(s)]]></entry>
-	<entry key="notification.room.activity"><![CDATA[You have new activities, please check "Activities&Action"]]></entry>
 	<entry key="poll.clone"><![CDATA[Clone]]></entry>
 	<entry key="poll.type.NUMERIC"><![CDATA[Числов 1-10]]></entry>
 	<entry key="poll.type.YES_NO"><![CDATA[Да/Не]]></entry>
@@ -898,13 +892,6 @@ please check <tt>openmeetings.log</tt> and contact OpenMeetings developers]]></e
 	<entry key="send.on.enter"><![CDATA[Send on Enter]]></entry>
 	<entry key="sound.enable"><![CDATA[Enable sound]]></entry>
 	<entry key="sound.mute"><![CDATA[Mute sound]]></entry>
-	<entry key="template.new.group.users.notification.body"><![CDATA[Dear "{0}" group moderator,<br/>
-<br/>
-{1} new users were added to the group in the last {2} hours<br/>
-Please visit {3} OM server and check them under Admin -> Groups]]></entry>
-	<entry key="template.new.group.users.notification.footer"><![CDATA[Regards,<br/>
-{0} Support Team.]]></entry>
-	<entry key="template.new.group.users.notification.subject"><![CDATA[[{0}] New "{1}" group users]]></entry>
 	<entry key="template.recording.expiring.body"><![CDATA[Your recent {0} recording will be automatically deleted
 		in {1} days. If you would like to save this recording, please download it before then.]]></entry>
 	<entry key="template.recording.expiring.footer"><![CDATA[Regards,<br/>
@@ -912,8 +899,6 @@ Please visit {3} OM server and check them under Admin -> Groups]]></entry>
 	<entry key="template.recording.expiring.greetings"><![CDATA[Hello {0}]]></entry>
 	<entry key="template.recording.expiring.subj.prefix"><![CDATA[Recording will be deleted]]></entry>
 	<entry key="template.recording.expiring.subj.room"><![CDATA[ -- Room[{0}]]]></entry>
-	<entry key="template.recording.invitation.text"><![CDATA[Click this link to view the conference recording video. [The link may only work for a certain period.]]]></entry>
-	<entry key="template.room.invitation.text"><![CDATA[Натиснете линка, за да участвате в срещата:]]></entry>
 	<entry key="ulist.right.audio.grant"><![CDATA[Allow this user to use microphone]]></entry>
 	<entry key="ulist.right.audio.request"><![CDATA[Request permission to use microphone]]></entry>
 	<entry key="ulist.right.audio.revoke"><![CDATA[Mute user and remove the right to turn on microphone]]></entry>

@@ -46,7 +46,6 @@ public class OAuthPanel extends AdminBasePanel {
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 		SearchableDataView<OAuthServer> dataView = new SearchableDataView<>("oauthServersList",
 				new SearchableDataProvider<>(OAuth2Dao.class))
 		{
@@ -63,7 +62,7 @@ public class OAuthPanel extends AdminBasePanel {
 					@Override
 					protected void onEvent(AjaxRequestTarget target) {
 						form.setModelObject(server);
-						form.setNewRecordVisible(false);
+						form.setNewVisible(false);
 						target.add(form, listContainer);
 					}
 				});
@@ -88,6 +87,8 @@ public class OAuthPanel extends AdminBasePanel {
 		add(navigator);
 
 		form = new OAuthForm("form", listContainer, new OAuthServer());
+		form.setNewVisible(true);
 		add(form);
+		super.onInitialize();
 	}
 }

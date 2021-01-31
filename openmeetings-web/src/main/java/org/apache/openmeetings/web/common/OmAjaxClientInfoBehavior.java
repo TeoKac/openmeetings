@@ -44,7 +44,9 @@ public class OmAjaxClientInfoBehavior extends AjaxClientInfoBehavior {
 
 		@Override
 		public List<HeaderItem> getDependencies() {
-			return List.of(JavaScriptHeaderItem.forReference(BrowserInfoForm.JS));
+			List<HeaderItem> list = super.getDependencies();
+			list.add(JavaScriptHeaderItem.forReference(BrowserInfoForm.JS));
+			return list;
 		}
 	};
 

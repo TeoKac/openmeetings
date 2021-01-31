@@ -32,11 +32,10 @@ public abstract class AdminActionsPanel<T> extends FormActionsPanel<T> {
 	private static final long serialVersionUID = 1L;
 	private final Label newRecord = new Label("newRecord", Model.of(""));
 	private final Form<T> form;
-	private AjaxButton newBtn;
 	private AjaxLink<Void> delBtn;
 	private AjaxLink<Void> restoreBtn;
 
-	protected AdminActionsPanel(String id, final Form<T> form) {
+	public AdminActionsPanel(String id, final Form<T> form) {
 		super(id, form);
 		this.form = form;
 	}
@@ -46,7 +45,7 @@ public abstract class AdminActionsPanel<T> extends FormActionsPanel<T> {
 		newRecord.setDefaultModelObject(getString("155"));
 		add(newRecord.setVisible(false).setOutputMarkupId(true));
 
-		newBtn = new AjaxButton("btn-new", form) {
+		final AjaxButton newBtn = new AjaxButton("btn-new", form) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -76,7 +75,7 @@ public abstract class AdminActionsPanel<T> extends FormActionsPanel<T> {
 			public void onClick(AjaxRequestTarget target) {
 				// repaint the feedback panel so that it is hidden
 				target.add(feedback);
-				setNewRecordVisible(false);
+				setNewVisible(false);
 				onDeleteSubmit(target, form);
 			}
 		};
@@ -88,7 +87,7 @@ public abstract class AdminActionsPanel<T> extends FormActionsPanel<T> {
 			public void onClick(AjaxRequestTarget target) {
 				// repaint the feedback panel so that it is hidden
 				target.add(feedback);
-				setNewRecordVisible(false);
+				setNewVisible(false);
 				onRestoreSubmit(target, form);
 			}
 		};
@@ -97,12 +96,8 @@ public abstract class AdminActionsPanel<T> extends FormActionsPanel<T> {
 		super.onInitialize();
 	}
 
-	public void setNewVisible(boolean visible) {
-		newBtn.setVisible(visible);
-	}
-
 	@Override
-	public void setNewRecordVisible(boolean visible) {
+	public void setNewVisible(boolean visible) {
 		newRecord.setVisible(visible);
 	}
 

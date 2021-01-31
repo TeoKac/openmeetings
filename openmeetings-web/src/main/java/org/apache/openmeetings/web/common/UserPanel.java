@@ -26,11 +26,11 @@ import org.apache.wicket.model.IModel;
 public abstract class UserPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 
-	protected UserPanel(String id) {
+	public UserPanel(String id) {
 		super(id);
 	}
 
-	protected UserPanel(String id, IModel<?> model) {
+	public UserPanel(String id, IModel<?> model) {
 		super(id, model);
 	}
 }

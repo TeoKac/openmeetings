@@ -1,7 +1,8 @@
 /* Licensed under the Apache License, Version 2.0 (the "License") http://www.apache.org/licenses/LICENSE-2.0 */
 function onOmGotoClick() {
 	const gotoBtn = $('#calendar .fc-gotoBtn-button');
-	let gotoSpan = gotoBtn.parent().find('.goto-span');
+	let selected = null
+		, gotoSpan = gotoBtn.parent().find('.goto-span');
 	if (gotoSpan.length < 1) {
 		gotoBtn.parent().append($('<span class="goto-span"><span/></span>'));
 	}

@@ -61,7 +61,7 @@ public class VoteDialog extends Modal<RoomPollAnswer> {
 	private static final List<Integer> answers = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	private PollAnswerForm form;
 	private final NotificationPanel feedback = new NotificationPanel("feedback");
-	private final Label userLbl = new Label("user", Model.of(""));
+	private final IModel<String> user = Model.of((String)null);
 	@SpringBean
 	private UserDao userDao;
 	@SpringBean
@@ -78,7 +78,7 @@ public class VoteDialog extends Modal<RoomPollAnswer> {
 		setBackdrop(Backdrop.STATIC);
 
 		add(form = new PollAnswerForm("form", new CompoundPropertyModel<>(new RoomPollAnswer())));
-		addButton(new BootstrapAjaxButton(BUTTON_MARKUP_ID, new ResourceModel("32"), form, Buttons.Type.Outline_Primary) {
+		addButton(new BootstrapAjaxButton("button", new ResourceModel("32"), form, Buttons.Type.Outline_Primary) {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -104,7 +104,7 @@ public class VoteDialog extends Modal<RoomPollAnswer> {
 	}
 
 	static String getName(Component c, User u) {
-		return u == null ? "" : (getUserId().equals(u.getId()) ? c.getString("1411") : u.getDisplayName());
+		return u == null ? "" : (getUserId().equals(u.getId()) ? c.getString("1411") : u.getFirstname() + " " + u.getLastname());
 	}
 
 	public void updateModel(IPartialPageRequestHandler target, RoomPoll rp) {
@@ -112,12 +112,18 @@ public class VoteDialog extends Modal<RoomPollAnswer> {
 		a.setRoomPoll(rp);
 		User u = userDao.get(getUserId());
 		a.setVotedUser(u);
-		userLbl.setDefaultModelObject(getName(this, a.getRoomPoll().getCreator()));
+		user.setObject(getName(this, a.getRoomPoll().getCreator()));
 		form.setModelObject(a);
 		boolean typeNum = a.getRoomPoll() != null && RoomPoll.Type.NUMERIC == a.getRoomPoll().getType();
 		form.typeBool.setVisible(!typeNum);
 		form.typeInt.setVisible(typeNum);
 		target.add(form);
+	}
+
+	@Override
+	protected void onDetach() {
+		user.detach();
+		super.onDetach();
 	}
 
 	private class PollAnswerForm extends Form<RoomPollAnswer> {
@@ -133,7 +139,7 @@ public class VoteDialog extends Modal<RoomPollAnswer> {
 		protected void onInitialize() {
 			super.onInitialize();
 			add(feedback.setOutputMarkupId(true));
-			add(userLbl);
+			add(new Label("user", user));
 			add(new Label("roomPoll.question"));
 			add(typeBool.add(new RadioGroup<Boolean>("answer").setRequired(true)
 						.add(new Radio<>("true", Model.of(Boolean.TRUE))).add(new Radio<>("false", Model.of(Boolean.FALSE)))

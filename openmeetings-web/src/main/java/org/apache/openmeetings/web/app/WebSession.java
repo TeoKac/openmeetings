@@ -114,7 +114,7 @@ public class WebSession extends AbstractAuthenticatedWebSession implements IWebS
 	private FastDateFormat iso8601Format = null;
 	private FastDateFormat  sdf = null;
 	private UserDashboard dashboard;
-	private Invitation invitation = null;
+	private Invitation i = null;
 	private SOAPLogin soap = null;
 	private Long roomId = null;
 	private Long recordingId = null;
@@ -149,11 +149,11 @@ public class WebSession extends AbstractAuthenticatedWebSession implements IWebS
 		cm.invalidate(userId, getId());
 		super.invalidate();
 		userId = null;
-		rights = Set.of();
+		rights = Collections.unmodifiableSet(Collections.<Right>emptySet());
 		iso8601Format = null;
 		sdf = null;
 		languageId = -1;
-		invitation = null;
+		i = null;
 		soap = null;
 		roomId = null;
 		recordingId = null;
@@ -219,8 +219,8 @@ public class WebSession extends AbstractAuthenticatedWebSession implements IWebS
 		}
 	}
 
-	public void checkHashes(StringValue secure, StringValue inviteStr) {
-		log.debug("checkHashes, secure: '{}', invitation: '{}'", secure, inviteStr);
+	public void checkHashes(StringValue secure, StringValue invitation) {
+		log.debug("checkHashes, secure: '{}', invitation: '{}'", secure, invitation);
 		try {
 			log.debug("checkHashes, has soap in session ? '{}'", (soap != null));
 			if (!secure.isEmpty() && (soap == null || !soap.getHash().equals(secure.toString()))) {
@@ -231,32 +231,29 @@ public class WebSession extends AbstractAuthenticatedWebSession implements IWebS
 				}
 				signIn(secure.toString(), true);
 			}
-			if (!inviteStr.isEmpty()) {
-				// invitation should be re-checked each time, due to PERIOD invitation can be
-				// 1) not ready
-				// 2) already expired
+			if (!invitation.isEmpty() && (i == null || !i.getHash().equals(invitation.toString()))) {
 				// otherwise already logged-in with the same hash
 				if (isSignedIn()) {
 					log.debug("invitation: Session is authorized, going to invalidate");
 					invalidateNow();
 				}
-				invitation = inviteDao.getByHash(inviteStr.toString(), false);
+				i = inviteDao.getByHash(invitation.toString(), false);
 				Room r = null;
-				if (invitation != null && invitation.isAllowEntry()) {
+				if (i != null && i.isAllowEntry()) {
 					Set<Right> hrights = new HashSet<>();
-					if (invitation.getRoom() != null) {
-						r = invitation.getRoom();
-					} else if (invitation.getAppointment() != null && invitation.getAppointment().getRoom() != null) {
-						r = invitation.getAppointment().getRoom();
-					} else if (invitation.getRecording() != null) {
-						recordingId = invitation.getRecording().getId();
+					if (i.getRoom() != null) {
+						r = i.getRoom();
+					} else if (i.getAppointment() != null && i.getAppointment().getRoom() != null) {
+						r = i.getAppointment().getRoom();
+					} else if (i.getRecording() != null) {
+						recordingId = i.getRecording().getId();
 					}
 					if (r != null) {
-						redirectHash(r, () -> inviteDao.markUsed(invitation));
+						redirectHash(r, () -> inviteDao.markUsed(i));
 						hrights.add(Right.ROOM);
 						roomId = r.getId();
 					}
-					setUser(invitation.getInvitee(), hrights);
+					setUser(i.getInvitee(), hrights);
 				}
 			}
 		} catch (RedirectToUrlException e) {
@@ -433,7 +430,7 @@ public class WebSession extends AbstractAuthenticatedWebSession implements IWebS
 	}
 
 	public Invitation getInvitation() {
-		return invitation;
+		return i;
 	}
 
 	public SOAPLogin getSoapLogin() {
@@ -595,6 +592,11 @@ public class WebSession extends AbstractAuthenticatedWebSession implements IWebS
 		if (save) {
 			dashboardContext.getDashboardPersister().save(dashboard);
 		}
+	}
+
+	@Override
+	public long getOmLanguage() {
+		return getLanguage();
 	}
 
 	private static void checkIsInvalid() {

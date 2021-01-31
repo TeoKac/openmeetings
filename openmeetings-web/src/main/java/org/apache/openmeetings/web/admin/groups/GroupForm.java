@@ -63,7 +63,6 @@ public class GroupForm extends AdminBaseForm<Group> {
 	private final NumberTextField<Integer> maxRooms = new NumberTextField<>("maxRooms");
 	private final NumberTextField<Integer> recordingTtl = new NumberTextField<>("recordingTtl");
 	private final NumberTextField<Integer> reminderDays = new NumberTextField<>("reminderDays");
-	private final NumberTextField<Integer> notifyInterval = new NumberTextField<>("notifyInterval");
 	private final UploadableImagePanel logo = new UploadableImagePanel("logo", true) {
 		private static final long serialVersionUID = 1L;
 
@@ -154,7 +153,6 @@ public class GroupForm extends AdminBaseForm<Group> {
 		super.onInitialize();
 		final boolean isGroupAdmin = hasGroupAdminLevel(getRights());
 		setNewVisible(!isGroupAdmin);
-		setNewRecordVisible(!isGroupAdmin);
 		userToadd.setEnabled(!isGroupAdmin);
 		add(new RequiredTextField<String>("name").setLabel(new ResourceModel("165")));
 		add(logo);
@@ -179,7 +177,6 @@ public class GroupForm extends AdminBaseForm<Group> {
 		add(maxRooms.setLabel(new ResourceModel("admin.group.form.maxRooms")).setEnabled(false).setOutputMarkupId(true));
 		add(recordingTtl.setLabel(new ResourceModel("admin.group.form.recordingTtl")).setEnabled(false).setOutputMarkupId(true));
 		add(reminderDays.setLabel(new ResourceModel("admin.group.form.reminderDays")).setEnabled(false).setOutputMarkupId(true));
-		add(notifyInterval.setLabel(new ResourceModel("admin.group.new.users.notification.interval")));
 	}
 
 	@Override
@@ -196,7 +193,6 @@ public class GroupForm extends AdminBaseForm<Group> {
 		maxRooms.setEnabled(getModelObject().isLimited());
 		recordingTtl.setEnabled(getModelObject().isLimited());
 		reminderDays.setEnabled(getModelObject().isLimited());
-		notifyInterval.setModelObject(getModelObject().getNotifyInterval());
 		logo.update();
 		target.add(this, groupList);
 	}
@@ -239,7 +235,7 @@ public class GroupForm extends AdminBaseForm<Group> {
 			usersPanel.update(grpUser);
 		}
 		logo.process(Optional.of(target));
-		setNewRecordVisible(false);
+		setNewVisible(false);
 		updateView(target);
 	}
 }

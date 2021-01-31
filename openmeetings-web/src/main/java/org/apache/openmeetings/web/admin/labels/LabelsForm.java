@@ -52,7 +52,6 @@ public class LabelsForm extends AdminBaseForm<StringLabel> {
 		super.onInitialize();
 		add(new RequiredTextField<String>("key").setLabel(new ResourceModel("165")));
 		add(new TextArea<String>("value"));
-		setNewRecordVisible(true);
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class LabelsForm extends AdminBaseForm<StringLabel> {
 		} catch (Exception e) {
 			error("Unexpected error while saving label:" + e.getMessage());
 		}
-		setNewRecordVisible(false);
+		setNewVisible(false);
 		target.add(panel.listContainer);
 	}
 

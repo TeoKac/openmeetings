@@ -23,6 +23,7 @@ import static org.apache.openmeetings.util.OmFileHelper.getRecordingChunk;
 import static org.apache.openmeetings.web.app.WebSession.getUserId;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.openmeetings.core.converter.IRecordingConverter;
 import org.apache.openmeetings.core.converter.InterviewConverter;
@@ -33,6 +34,7 @@ import org.apache.openmeetings.db.dto.record.RecordingContainerData;
 import org.apache.openmeetings.db.entity.file.BaseFileItem;
 import org.apache.openmeetings.db.entity.record.Recording;
 import org.apache.openmeetings.db.entity.record.Recording.Status;
+import org.apache.openmeetings.db.entity.record.RecordingChunk;
 import org.apache.openmeetings.web.common.InvitationDialog;
 import org.apache.openmeetings.web.common.NameDialog;
 import org.apache.openmeetings.web.common.UserBasePanel;
@@ -111,11 +113,12 @@ public class RecordingsPanel extends UserBasePanel {
 							Recording r = (Recording)getLastSelected();
 							isInterview = r.isInterview();
 
-							if (r.getRoomId() != null && r.getOwnerId() != null && r.getOwnerId().equals(getUserId()) && r.getStatus() != Status.RECORDING && r.getStatus() != Status.CONVERTING) {
-								// will enable re-conversion if at least some of the chunks are OK
-								enabled = chunkDao.getByRecording(r.getId())
+							if (r.getOwnerId() != null && r.getOwnerId().equals(getUserId()) && r.getStatus() != Status.RECORDING && r.getStatus() != Status.CONVERTING) {
+								List<RecordingChunk> chunks = chunkDao.getByRecording(r.getId())
 										.stream()
-										.anyMatch(chunk -> getRecordingChunk(r.getRoomId(), chunk.getStreamName()).exists());
+										.filter(chunk -> r.getRoomId() == null || !getRecordingChunk(r.getRoomId(), chunk.getStreamName()).exists())
+										.collect(Collectors.toList());
+								enabled = !chunks.isEmpty();
 							}
 						}
 						setEnabled(enabled);

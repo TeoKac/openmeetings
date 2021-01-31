@@ -73,6 +73,7 @@ public class WidgetsPanel extends UserBasePanel {
 			}
 			if (!hasAdminLevel(getRights()) && AdminWidget.class.getCanonicalName().equals(wd.getWidgetClassName())) {
 				i.remove();
+				continue;
 			}
 		}
 		add(new ListView<>("widgets", widgets) {

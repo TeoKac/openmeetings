@@ -24,10 +24,11 @@ import static org.apache.openmeetings.web.common.confirmation.ConfirmationBehavi
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.apache.openmeetings.core.remote.KurentoHandler;
 import org.apache.openmeetings.core.remote.StreamProcessor;
@@ -75,11 +76,14 @@ public class ConnectionsPanel extends AdminBasePanel {
 			private static final long serialVersionUID = 1L;
 
 			private List<IDataProviderEntity> getConnections() {
-				return Stream.concat(cm.stream()
-						, streamProcessor.getStreams()
+				List<IDataProviderEntity> l = new ArrayList<>();
+				l.addAll(cm.list());
+				Collection<KStreamDto> streams = streamProcessor.getStreams()
 						.stream()
 						.map(KStreamDto::new)
-					).collect(Collectors.toList());
+						.collect(Collectors.toList());
+				l.addAll(streams);
+				return l;
 			}
 
 			@Override

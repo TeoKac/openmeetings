@@ -32,7 +32,6 @@ import java.util.function.Consumer;
 import org.apache.openmeetings.AbstractWicketTester;
 import org.apache.openmeetings.db.entity.calendar.Appointment;
 import org.apache.openmeetings.db.entity.record.Recording;
-import org.apache.openmeetings.db.entity.user.Group;
 import org.apache.openmeetings.db.entity.user.User;
 import org.apache.wicket.util.string.Strings;
 import org.junit.jupiter.api.Test;
@@ -57,8 +56,6 @@ class TestSubjTemplate extends AbstractWicketTester {
 		ar.setLanguageId(14L); // rtl, arabic
 		users.add(en);
 		users.add(ar);
-		Group g = new Group();
-		g.setName("Template test");
 		for (User u : users) {
 			TimeZone tz = TimeZone.getTimeZone(ids[rnd.nextInt(ids.length)]);
 			checkTemplate(CreatedAppointmentTemplate.get(u, a, tz, u.getLogin()));
@@ -66,7 +63,6 @@ class TestSubjTemplate extends AbstractWicketTester {
 			checkTemplate(UpdatedAppointmentTemplate.get(u, a, tz, u.getLogin()));
 			checkTemplate(AppointmentReminderTemplate.get(u, a, tz));
 			checkTemplate(RecordingExpiringTemplate.get(u, rec, 1L));
-			checkTemplate(NewGroupUsersNotificationTemplate.get(u, g, 18L));
 		}
 	}
 

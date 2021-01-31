@@ -35,12 +35,12 @@ public abstract class BasePanel extends Panel {
 	public static final String EVT_CLICK = "click";
 	protected static final String ROW_CLASS = "clickable";
 
-	protected BasePanel(String id) {
+	public BasePanel(String id) {
 		super(id);
 		setOutputMarkupId(true);
 	}
 
-	protected BasePanel(String id, IModel<?> model) {
+	public BasePanel(String id, IModel<?> model) {
 		super(id, model);
 		setOutputMarkupId(true);
 	}
@@ -98,10 +98,6 @@ public abstract class BasePanel extends Panel {
 	protected void process(IPartialPageRequestHandler handler, JSONObject o) throws IOException {
 	}
 
-	/**
-	 * can be overridden by children to provide custom CSS class
-	 * @return custom CSS class
-	 */
 	protected String getCssClass() {
 		return "";
 	}
